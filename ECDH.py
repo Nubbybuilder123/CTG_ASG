@@ -16,6 +16,6 @@ def derive_aes_key(shared_secret):
         algorithm=hashes.SHA256(),
         length=32,
         salt=None,
-        info=b"secure banking session",
+        info=b"secure banking session"
     )
     return hkdf.derive(shared_secret)
