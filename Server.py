@@ -1,6 +1,7 @@
 # server.py
 from ECDH import generate_keypair as ecdh_keys, derive_shared_secret, derive_aes_key
 from ECDSA import generate_keypair as ecdsa_keys, sign, verify
+import time
 
 class BankServer:
     def __init__(self):
@@ -20,8 +21,11 @@ class BankServer:
             self.ecdh_private, client_ecdh_public
         )
         self.session_key = derive_aes_key(shared_secret)
+        time.sleep(2)
         print("[Server] Secure session key established.")
+
 
     def verify_transaction(self, client_public_key, transaction, signature):
         verify(client_public_key, transaction, signature)
+        time.sleep(2)
         print("[Server] Transaction verified and accepted.")
