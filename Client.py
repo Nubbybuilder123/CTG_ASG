@@ -128,7 +128,8 @@ while True:
         print(f"Server side decrypted transaction: {transaction_receive}")
         print(f"Server side decrypted signature: {signature_receive}")
 
-        print(f"Verifying transaction at server side.....\n")
+        print(f"Verifying transaction at server side with client ECDSA public key.....")
+        print(f"Client ECDSA Public Key: {client_ecdsa_public}\n")
         status = server.verify_transaction(client_ecdsa_public, transaction_receive, signature_receive)
         time.sleep(2)
         if (status):
@@ -161,7 +162,8 @@ while True:
         transaction_receive, signature_receive = decrypt_payload(client_session_key, nonce, aesEncryptedPayload)
         print(f"Server side decrypted transaction: {transaction_receive}")
         print(f"Server side decrypted signature: {signature_receive}\n")
-        print(f"Verifying transaction at server side.....\n")
+        print(f"Verifying transaction at server side with client ECDSA public key.....")
+        print(f"Client ECDSA Public Key: {client_ecdsa_public}\n")
         time.sleep(2)
         status = server.verify_transaction(client_ecdsa_public, transaction_receive, signature_receive)
 
