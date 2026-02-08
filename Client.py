@@ -81,9 +81,6 @@ print(f"Client Session Key: {client_session_key}\n")
 server.establish_session(client_ecdh_public)
 
 
-print
-
-print("[Client] Secure session established.\n")
 
 
 # CLI Banking Menu
@@ -123,12 +120,12 @@ while True:
         print(f"Decrypting encrypted payload at server side using session key.....\n")
         time.sleep(2)
         
-        transaction_receive, signature_receive = decrypt_payload(client_session_key, nonce, aesEncryptedPayload)
+        transaction_receive, signature_receive = decrypt_payload(server.session_key, nonce, aesEncryptedPayload)
 
         print(f"Server side decrypted transaction: {transaction_receive}")
         print(f"Server side decrypted signature: {signature_receive}")
 
-        print(f"Verifying transaction at server side with client ECDSA public key.....")
+        print(f"Verifying transaction at server side with client ECDSA public key.....") 
         print(f"Client ECDSA Public Key: {client_ecdsa_public}\n")
         status = server.verify_transaction(client_ecdsa_public, transaction_receive, signature_receive)
         time.sleep(2)
@@ -159,7 +156,7 @@ while True:
         print(f"Payload Received: {aesEncryptedPayload}")
         print(f"Decrypting encrypted payload at server side using session key.....\n")
         time.sleep(2)
-        transaction_receive, signature_receive = decrypt_payload(client_session_key, nonce, aesEncryptedPayload)
+        transaction_receive, signature_receive = decrypt_payload(server.session_key, nonce, aesEncryptedPayload)
         print(f"Server side decrypted transaction: {transaction_receive}")
         print(f"Server side decrypted signature: {signature_receive}\n")
         print(f"Verifying transaction at server side with client ECDSA public key.....")
